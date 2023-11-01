@@ -13,6 +13,7 @@ RUN apt-get update -y && \
     libssl-dev          \
     ca-certificates     \
     kmod                \
+    curl                \
     wget
 
 ENV SRC_DIR=/usr/src            \
@@ -28,8 +29,10 @@ RUN mkdir -p ${SRC_DIR} ${DIST_DIR} && \
 
 WORKDIR ${LINUX_DIR}
 
-COPY microvm-kernel-ci-x86_64-6.1.config .config
+RUN curl -L -o microvm-kernel-ci-x86_64-6.1.config https://raw.githubusercontent.com/firecracker-microvm/firecracker/main/resources/guest_configs/microvm-kernel-ci-x86_64-6.1.config
+COPY k8s_additions.config .
 
+RUN ./scripts/kconfig/merge_config.sh -m microvm-kernel-ci-x86_64-6.1.config k8s_additions.config
 RUN make LOCALVERSION= olddefconfig
 RUN make LOCALVERSION= -j32
 
