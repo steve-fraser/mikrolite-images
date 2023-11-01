@@ -29,5 +29,11 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/* && \
     sed -i -e 's/^AcceptEnv LANG LC_\*$/#AcceptEnv LANG LC_*/' /etc/ssh/sshd_config
 
-RUN mkdir -p /var/lib/rancher/rke2/agent/images/
-RUN curl -Lo /var/lib/rancher/rke2/agent/images/rke2-images.linux-arm64.tar.gz https://github.com/rancher/rke2/releases/download/${RKE2_VERSION}/rke2-images.linux-arm64.tar.gz
+RUN mkdir /root/rke2-artifacts && \
+    cd /root/rke2-artifacts && \
+    curl -OLs https://github.com/rancher/rke2/releases/download/${RKE2_VERSION}/rke2-images.linux-amd64.tar.zst && \
+    curl -OLs https://github.com/rancher/rke2/releases/download/${RKE2_VERSION}/rke2.linux-amd64.tar.gz && \
+    curl -OLs https://github.com/rancher/rke2/releases/download/${RKE2_VERSION}/sha256sum-amd64.txt && \
+    curl -sfL https://get.rke2.io --output install.sh
+
+# To run the install: INSTALL_RKE2_ARTIFACT_PATH=/root/rke2-artifacts sh install.sh
