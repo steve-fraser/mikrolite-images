@@ -21,7 +21,8 @@ ENV SRC_DIR=/usr/src            \
     LINUX_DIR=/usr/src/linux    \
     LINUX_REPO_URL=git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
 
-ARG KERNEL_VERSION="6.1"
+
+ARG KERNEL_VERSION
 
 RUN mkdir -p ${SRC_DIR} ${DIST_DIR} && \
     git clone --depth 1 --branch v${KERNEL_VERSION} ${LINUX_REPO_URL} ${LINUX_DIR} && \
@@ -29,10 +30,12 @@ RUN mkdir -p ${SRC_DIR} ${DIST_DIR} && \
 
 WORKDIR ${LINUX_DIR}
 
-RUN curl -L -o microvm-kernel-ci-x86_64-6.1.config https://raw.githubusercontent.com/firecracker-microvm/firecracker/main/resources/guest_configs/microvm-kernel-ci-x86_64-6.1.config
+ARG KERNEL_CONFIG
+
+RUN curl -L -o microvm-kernel.config ${KERNEL_CONFIG}
 COPY k8s_additions.config .
 
-RUN ./scripts/kconfig/merge_config.sh -m microvm-kernel-ci-x86_64-6.1.config k8s_additions.config
+RUN ./scripts/kconfig/merge_config.sh -m microvm-kernel.config k8s_additions.config
 RUN make LOCALVERSION= olddefconfig
 RUN make LOCALVERSION= -j32
 
