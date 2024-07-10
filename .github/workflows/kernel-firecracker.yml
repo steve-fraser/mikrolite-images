@@ -1,4 +1,4 @@
-name: Kernel - Build and publish
+name: Kernel (FC) - Build and publish
 
 on:
   workflow_dispatch:
