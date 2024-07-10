@@ -6,7 +6,7 @@ ARG RKE2_VERSION="v1.28.3+rke2r1"
 FROM ghcr.io/mikrolite/firecracker-kernel:5.10 AS kernel
 
 FROM ubuntu:22.04
-LABEL org.opencontainers.image.source=https://github.com/mikrolite/images
+LABEL org.opencontainers.image.source=https://github.com/liquidmetal-dev/mikrolite-images
 
 RUN apt-get update && apt-get install -y \
     kmod \
