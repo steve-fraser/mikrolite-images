@@ -43,5 +43,5 @@ RUN cp arch/x86/boot/compressed/vmlinux.bin /boot/vmlinux.bin&& \
     cp .config /boot/config-${KERNEL_VERSION}
 
 FROM scratch
-LABEL org.opencontainers.image.source=https://github.com/mikrolite/images
+LABEL org.opencontainers.image.source=https://github.com/liquidmetal-dev/mikrolite-images
 COPY --from=builder /boot /boot
