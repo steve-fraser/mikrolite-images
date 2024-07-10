@@ -1,4 +1,4 @@
-REGISTRY?=ghcr.io/mikrolite
+REGISTRY?=ghcr.io/liquidmetal-dev
 IMAGE?=firecracker-kernel
 IMAGE_NAME?=$(REGISTRY)/$(IMAGE)
 
