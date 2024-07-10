@@ -3,7 +3,7 @@ ARG RKE2_VERSION="v1.28.3+rke2r1"
 # this is a temporary hack to ensure the kernel config is in the right place
 # otherwise modprobe will fail. In the future we can mount the kernel image
 # using cloud-init / ignition
-FROM ghcr.io/mikrolite/firecracker-kernel:5.10 AS kernel
+FROM ghcr.io/liquidmetal-dev/firecracker-kernel:5.10 AS kernel
 
 FROM ubuntu:22.04
 LABEL org.opencontainers.image.source=https://github.com/liquidmetal-dev/mikrolite-images
