@@ -1,4 +1,4 @@
-REGISTRY?=ghcr.io/mikrolite
+REGISTRY?=ghcr.io/liquidmetal-dev
 IMAGE_NAME?=$(REGISTRY)/node-rke2-airgapped
 TAG?=dev
 
