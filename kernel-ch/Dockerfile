@@ -39,9 +39,10 @@ RUN ./scripts/kconfig/merge_config.sh -m microvm-kernel.config k8s_additions.con
 RUN make LOCALVERSION= olddefconfig
 RUN make LOCALVERSION= -j32
 
-RUN cp arch/x86/boot/compressed/vmlinux.bin /boot/vmlinux.bin&& \
-    cp .config /boot/config-${KERNEL_VERSION}.0
+RUN mkdir output
+RUN cp arch/x86/boot/compressed/vmlinux.bin ./output/vmlinux.bin&& \
+    cp .config ./output/config-${KERNEL_VERSION}.0
 
 FROM scratch
 LABEL org.opencontainers.image.source=https://github.com/liquidmetal-dev/mikrolite-images
-COPY --from=builder /boot /boot
+COPY --from=builder /usr/src/linux/output   /boot
