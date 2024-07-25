@@ -32,10 +32,11 @@ WORKDIR ${LINUX_DIR}
 
 ARG KERNEL_CONFIG
 
-RUN curl -L -o microvm-kernel.config ${KERNEL_CONFIG}
+RUN curl -L -o .config ${KERNEL_CONFIG}
+RUN make LOCALVERSION= olddefconfig
+RUN mv .config temp.config
 COPY k8s_additions.config .
-
-RUN ./scripts/kconfig/merge_config.sh -m microvm-kernel.config k8s_additions.config
+RUN ./scripts/kconfig/merge_config.sh -m temp.config k8s_additions.config
 RUN make LOCALVERSION= -j32
 
 RUN mkdir output
