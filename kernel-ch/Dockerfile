@@ -36,7 +36,6 @@ RUN curl -L -o microvm-kernel.config ${KERNEL_CONFIG}
 COPY k8s_additions.config .
 
 RUN ./scripts/kconfig/merge_config.sh -m microvm-kernel.config k8s_additions.config
-RUN make LOCALVERSION= olddefconfig
 RUN make LOCALVERSION= -j32
 
 RUN mkdir output
