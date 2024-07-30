@@ -32,10 +32,10 @@ WORKDIR ${LINUX_DIR}
 
 ARG KERNEL_CONFIG
 
-RUN curl -L -o base.config ${KERNEL_CONFIG}
-COPY k8s_additions.config .
-RUN ./scripts/kconfig/merge_config.sh -m base.config k8s_additions.config
+RUN curl -L -o .config ${KERNEL_CONFIG}
 RUN make LOCALVERSION= olddefconfig
+COPY k8s_additions.config k8s_additions-fragment
+RUN ./scripts/kconfig/merge_config.sh .config k8s_additions-fragment
 RUN make LOCALVERSION= -j32
 
 RUN mkdir output
