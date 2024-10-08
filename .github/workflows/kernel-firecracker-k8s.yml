@@ -1,11 +1,11 @@
-name: Kernel (FC) - Build and publish
+name: Kernel for k8s (FC) - Build and publish
 
 on:
   workflow_dispatch:
 
 defaults:
   run:
-    working-directory: kernel-fc
+    working-directory: kernel-k8s-fc
 
 jobs:
   build-and-publish:

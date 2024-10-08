@@ -33,12 +33,13 @@ WORKDIR ${LINUX_DIR}
 ARG KERNEL_CONFIG
 
 RUN curl -L -o .config ${KERNEL_CONFIG}
+
+RUN make LOCALVERSION= olddefconfig
 RUN make LOCALVERSION= -j32
 
-RUN mkdir output
-RUN cp arch/x86/boot/compressed/vmlinux.bin ./output/vmlinux.bin&& \
-    cp .config ./output/config-${KERNEL_VERSION}.0
+RUN cp vmlinux /boot/vmlinux && \
+    cp .config /boot/config-${KERNEL_VERSION}
 
 FROM scratch
 LABEL org.opencontainers.image.source=https://github.com/liquidmetal-dev/mikrolite-images
-COPY --from=builder /usr/src/linux/output   /boot
+COPY --from=builder /boot /boot
