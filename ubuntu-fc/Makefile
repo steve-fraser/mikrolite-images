@@ -1,5 +1,5 @@
 REGISTRY?=ghcr.io/liquidmetal-dev
-IMAGE_NAME?=$(REGISTRY)/ubuntu-ch
+IMAGE_NAME?=$(REGISTRY)/ubuntu-fc
 TAG?=22.04
 
 build:
