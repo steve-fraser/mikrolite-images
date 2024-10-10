@@ -3,7 +3,7 @@ ARG UBUNTU_VERSION="22.04"
 # this is a temporary hack to ensure the kernel config is in the right place
 # otherwise modprobe will fail. In the future we can mount the kernel image
 # using cloud-init / ignition
-FROM ghcr.io/liquidmetal-dev/cloudhypervisor-kernel:6.2 AS kernel
+FROM ghcr.io/steve-fraser/cloudhypervisor-kernel:6.2 AS kernel
 
 FROM ubuntu:${UBUNTU_VERSION}
 LABEL org.opencontainers.image.source=https://github.com/liquidmetal-dev/mikrolite-images

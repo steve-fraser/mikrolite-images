@@ -1,4 +1,4 @@
-REGISTRY?=ghcr.io/liquidmetal-dev
+REGISTRY?=ghcr.io/steve-fraser
 IMAGE_NAME?=$(REGISTRY)/ubuntu-ch
 TAG?=22.04
 

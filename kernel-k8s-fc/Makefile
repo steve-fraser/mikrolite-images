@@ -1,4 +1,4 @@
-REGISTRY?=ghcr.io/liquidmetal-dev
+REGISTRY?=ghcr.io/steve-fraser
 IMAGE?=firecracker-kernel-k8s
 IMAGE_NAME?=$(REGISTRY)/$(IMAGE)
 
